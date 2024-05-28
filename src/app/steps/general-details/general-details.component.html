@@ -1,0 +1,59 @@
+<div class="container">
+    <form [formGroup]="formWizardService.generalDetails">
+      <!-- Name Field -->
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input formControlName="name" id="name" class="form-control" type="text">
+        <div *ngIf="formWizardService.generalDetails.get('name')?.invalid && formWizardService.generalDetails.get('name')?.touched" class="text-danger">
+          Name is required.
+        </div>
+      </div>
+  
+      <!-- Phone Number Field -->
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number</label>
+        <input formControlName="phoneNumber" id="phoneNumber" class="form-control" type="text">
+        <div *ngIf="formWizardService.generalDetails.get('phoneNumber')?.invalid && formWizardService.generalDetails.get('phoneNumber')?.touched" class="text-danger">
+          <div *ngIf="formWizardService.generalDetails.get('phoneNumber')?.errors?.required">Phone number is required.</div>
+          <div *ngIf="formWizardService.generalDetails.get('phoneNumber')?.errors?.pattern">Invalid phone number format.</div>
+        </div>
+      </div>
+  
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input formControlName="email" id="email" class="form-control" type="email">
+        <div *ngIf="formWizardService.generalDetails.get('email')?.invalid && formWizardService.generalDetails.get('email')?.touched" class="text-danger">
+          <div *ngIf="formWizardService.generalDetails.get('email')?.errors?.required">Email is required.</div>
+          <div *ngIf="formWizardService.generalDetails.get('email')?.errors?.email">Invalid email address.</div>
+        </div>
+      </div>
+  
+      <!-- Gender Field -->
+      <div class="form-group">
+        <label for="gender">Gender</label>
+        <select formControlName="gender" id="gender" class="form-control">
+          <option value="" disabled>Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+        <div *ngIf="formWizardService.generalDetails.get('gender')?.invalid && formWizardService.generalDetails.get('gender')?.touched" class="text-danger">
+          Gender selection is required.
+        </div>
+      </div>
+  
+      <!-- DOB Field -->
+      <div class="form-group">
+        <label for="dob">Date of Birth</label>
+        <input formControlName="dob" id="dob" class="form-control" type="date">
+        <div *ngIf="formWizardService.generalDetails.get('dob')?.invalid && formWizardService.generalDetails.get('dob')?.touched" class="text-danger">
+          Date of birth is required.
+        </div>
+      </div>
+  
+      <!-- Navigation Buttons -->
+      <button type="button" (click)="nextStep()" class="btn btn-primary">Next</button>
+    </form>
+  </div>
+  

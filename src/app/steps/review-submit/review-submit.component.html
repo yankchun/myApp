@@ -1,0 +1,16 @@
+<div class="container">
+    <h2>Review Your Details</h2>
+    <p><strong>Name:</strong> {{ formWizardService.generalDetails.get('name')?.value }}</p>
+    <p><strong>Phone Number:</strong> {{ formWizardService.generalDetails.get('phoneNumber')?.value }}</p>
+    <!-- Repeat for other fields -->
+
+    <div><strong>Introduction:</strong> {{ formWizardService.personalDetails.get('introduction')?.value }}</div>
+    <div><strong>Hobbies:</strong>
+        <ul>
+            <li *ngFor="let hobby of formWizardService.personalDetails.get('hobbies')?.value">{{ hobby }}</li>
+        </ul>
+    </div>
+
+    <button type="button" (click)="previousStep()">Back</button>
+    <button type="button" (click)="onSubmit()">Submit</button>
+</div>
