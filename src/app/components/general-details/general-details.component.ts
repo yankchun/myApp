@@ -9,7 +9,7 @@ import { mobileNumberValidator, startsWithSpaceValidator } from 'src/app/shared/
 @Component({
   selector: 'app-general-details',
   templateUrl: './general-details.component.html',
-  styleUrls: ['./general-details.component.css']
+  styleUrls: ['./general-details.component.scss']
 })
 export class GeneralDetailsComponent implements OnInit {
 

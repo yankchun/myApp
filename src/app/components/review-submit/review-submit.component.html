@@ -1,16 +1,61 @@
-<div class="container">
-    <h2>Review Your Details</h2>
-    <p><strong>Name:</strong> {{ formWizardService.generalDetails.get('name')?.value }}</p>
-    <p><strong>Phone Number:</strong> {{ formWizardService.generalDetails.get('phoneNumber')?.value }}</p>
-    <!-- Repeat for other fields -->
+<div class="review-wrapper">
+    <div class="container">
+        <div class="page-title">Review Your Details</div>
+        <div class="general-section">
+            <div class="section-title">General Details</div>
+            <div class="row">
+                <div class="col-12 col-sm-6">
+                    <div class="wrapper">
+                        <div class="review-label">Name</div>
+                        <div class="review-value">{{ formWizardService.generalDetails.value.name }}</div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="wrapper">
+                        <div class="review-label">Phone Number</div>
+                        <div class="review-value">{{ formWizardService.generalDetails.value.phoneNumber }}</div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="wrapper">
+                        <div class="review-label">Email</div>
+                        <div class="review-value">{{ formWizardService.generalDetails.value.email }}</div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="wrapper">
+                        <div class="review-label">Gender</div>
+                        <div class="review-value">{{ formWizardService.generalDetails.value.gender }}</div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="wrapper">
+                        <div class="review-label">Date of Birth</div>
+                        <div class="review-value">{{ formWizardService.generalDetails.value.dob }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <div><strong>Introduction:</strong> {{ formWizardService.personalDetails.get('introduction')?.value }}</div>
-    <div><strong>Hobbies:</strong>
-        <ul>
-            <li *ngFor="let hobby of formWizardService.personalDetails.get('hobbies')?.value">{{ hobby }}</li>
-        </ul>
+        <hr>
+
+        <div class="personal-section">
+            <div class="section-title">Personal Details</div>
+            <div class="wrapper">
+                <div class="review-label">Introduction</div>
+                <div class="review-value">{{ formWizardService.personalDetails.value.introduction }}</div>
+            </div>
+            <div class="wrapper">
+                <div class="review-label">Hobbies</div>
+                <div class="review-value">
+                    <div class="hobby-item" *ngFor="let hobby of formWizardService.personalDetails.value.hobbies">{{ hobby }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="button-wrapper">
+            <button type="button" (click)="previousStep()" class="custom-btn">Back</button>
+            <button type="button" (click)="onSubmit()" class="custom-btn">Submit</button>
+        </div>
     </div>
-
-    <button type="button" (click)="previousStep()">Back</button>
-    <button type="button" (click)="onSubmit()">Submit</button>
 </div>

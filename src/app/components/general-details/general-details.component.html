@@ -1,61 +1,64 @@
-<div class="container">
-    <form [formGroup]="generalDetailsForm">
-      <!-- Name Field -->
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input formControlName="name" id="name" class="form-control" type="text">
-        <div *ngIf="generalDetailsInfo['name'].invalid && generalDetailsInfo['name'].touched" class="text-danger">
-          <div *ngIf="generalDetailsInfo['name'].errors?.['required']">Name is required.</div>
-          <div *ngIf="generalDetailsInfo['name'].errors?.['startsWithSpace']">No leading spaces.</div>
-        </div>
-      </div>
-  
-      <!-- Phone Number Field -->
-      <div class="form-group">
-        <label for="phoneNumber">Phone Number</label>
-        <input formControlName="phoneNumber" id="phoneNumber" class="form-control" type="text">
-        <div class="hint">Phone number must always starts with 01 followed by minimum of 7 digits and maximum of 9 digits from 0 to 9.</div>
-        <div *ngIf="generalDetailsInfo['phoneNumber'].invalid && generalDetailsInfo['phoneNumber'].touched" class="text-danger">
-          <div *ngIf="generalDetailsInfo['phoneNumber'].errors?.['required']">Phone number is required.</div>
-          <div *ngIf="generalDetailsInfo['phoneNumber'].errors?.['mobNumber']">Invalid phone number format.</div>
-        </div>
-      </div>
-  
-      <!-- Email Field -->
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input formControlName="email" id="email" class="form-control" type="email">
-        <div *ngIf="generalDetailsInfo['email'].invalid && generalDetailsInfo['email'].touched" class="text-danger">
-          <div *ngIf="generalDetailsInfo['email'].errors?.['required']">Email is required.</div>
-          <div *ngIf="generalDetailsInfo['email'].errors?.['email']">Invalid email address.</div>
-        </div>
-      </div>
-  
-      <!-- Gender Field -->
-      <div class="form-group">
-        <label for="gender">Gender</label>
-        <select formControlName="gender" id="gender" class="form-control">
-          <option value="" disabled>Select Gender</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-        </select>
-        <div *ngIf="generalDetailsInfo['gender'].invalid && generalDetailsInfo['gender'].touched" class="text-danger">
-          Gender selection is required.
-        </div>
-      </div>
-  
-      <!-- DOB Field -->
-      <div class="form-group">
-        <label for="dob">Date of Birth</label>
-        <input formControlName="dob" id="dob" class="form-control" type="date">
-        <div *ngIf="generalDetailsInfo['dob'].invalid && generalDetailsInfo['dob'].touched" class="text-danger">
-          Date of birth is required.
-        </div>
-      </div>
-  
-      <!-- Navigation Buttons -->
-      <ngx-loading [show]="isLoading" [config]="config"></ngx-loading>
-      <button type="button" (click)="nextStep()" [disabled]="isLoading" class="btn btn-primary">Next</button>
-    </form>
-  </div>
-  
+<div class="general-details-wrapper">
+    <div class="container">
+        <div class="page-title">General Details</div>
+        <form [formGroup]="generalDetailsForm">
+            <div class="row">
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label for="name">Name<span>*</span></label>
+                        <input formControlName="name" id="name" class="form-control" type="text">
+                        <div *ngIf="generalDetailsInfo['name'].invalid && generalDetailsInfo['name'].touched" class="text-danger">
+                            <div *ngIf="generalDetailsInfo['name'].errors?.['required']">Name is required.</div>
+                            <div *ngIf="generalDetailsInfo['name'].errors?.['startsWithSpace']">No leading spaces.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label for="phoneNumber">Phone Number<span>*</span></label>
+                        <input formControlName="phoneNumber" id="phoneNumber" class="form-control" type="text">
+                        <div class="hint">Phone number must always starts with 01 followed by minimum of 7 digits and maximum of 9 digits from 0 to 9.</div>
+                        <div *ngIf="generalDetailsInfo['phoneNumber'].invalid && generalDetailsInfo['phoneNumber'].touched" class="text-danger">
+                            <div *ngIf="generalDetailsInfo['phoneNumber'].errors?.['required']">Phone number is required.</div>
+                            <div *ngIf="generalDetailsInfo['phoneNumber'].errors?.['mobNumber']">Invalid phone number format.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label for="email">Email<span>*</span></label>
+                        <input formControlName="email" id="email" class="form-control" type="email">
+                        <div *ngIf="generalDetailsInfo['email'].invalid && generalDetailsInfo['email'].touched" class="text-danger">
+                            <div *ngIf="generalDetailsInfo['email'].errors?.['required']">Email is required.</div>
+                            <div *ngIf="generalDetailsInfo['email'].errors?.['email']">Invalid email address.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label for="gender">Gender<span>*</span></label>
+                        <select formControlName="gender" id="gender" class="form-select">
+                            <option value="" disabled>Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                        <div *ngIf="generalDetailsInfo['gender'].invalid && generalDetailsInfo['gender'].touched" class="text-danger">Gender selection is required.</div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                        <label for="dob">Date of Birth<span>*</span></label>
+                        <input formControlName="dob" id="dob" class="form-control" type="date">
+                        <div *ngIf="generalDetailsInfo['dob'].invalid && generalDetailsInfo['dob'].touched" class="text-danger">Date of birth is required.</div>
+                    </div>
+                </div>
+            </div>
+
+            <ngx-loading [show]="isLoading" [config]="config"></ngx-loading>
+
+            <div class="button-wrapper">
+                <button type="button" (click)="nextStep()" [disabled]="isLoading" class="custom-btn">Next</button>
+            </div>
+        </form>
+    </div>
+</div>

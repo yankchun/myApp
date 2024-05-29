@@ -4,16 +4,18 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormWizardService } from 'src/app/services/form-wizard.service';
 import { loadingConfig } from 'src/app/shared/loading-config';
 import { AjaxService } from 'src/app/services/ajax.service';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-personal-details',
   templateUrl: './personal-details.component.html',
-  styleUrls: ['./personal-details.component.css']
+  styleUrls: ['./personal-details.component.scss']
 })
 export class PersonalDetailsComponent implements OnInit {
 
   @ViewChild('hobbyInput') hobbyInputElement!: ElementRef<HTMLInputElement>;
 
+  faXmark = faXmark;
   personalDetailsForm: FormGroup = this.fb.group({
     introduction: ['', [Validators.required]],
     hobbies: this.fb.array([])
@@ -30,7 +32,7 @@ export class PersonalDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeForm();
-    console.log('General Details:', this.formWizardService.generalDetails.value);
+    console.log('General Details:', this.formWizardService.generalDetails.value.dob);
   }
 
   initializeForm() {

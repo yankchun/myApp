@@ -1,0 +1,109 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import './assets/scss/colors.scss';
+
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+    background: #efefef;
+}
+
+.page-title {
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.custom-btn {
+    background-color: $primary-color;
+    border: 1px solid $primary-color;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    padding: 8px 25px;
+    transition: 0.2s ease-in-out;
+    font-weight: 500;
+
+    &:hover,
+    &:active {
+        background-color: $hover-color;
+        border-color: $hover-color;
+    }
+}
+
+form {
+    border-radius: 15px;
+    padding: 30px;
+    background: white;
+    -webkit-box-shadow: 0px 0px 5px 2px rgba(163, 163, 163, 1);
+    -moz-box-shadow: 0px 0px 5px 2px rgba(163, 163, 163, 1);
+    box-shadow: 0px 0px 5px 2px rgba(163, 163, 163, 1);
+
+    .form-group {
+        margin-bottom: 10px;
+
+        label {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 5px;
+
+            span {
+                color: red;
+            }
+        }
+    
+        input.form-control,
+        textarea,
+        select.form-select {
+            position: relative;
+            font-size: 14px;
+            border-color: #bcbcbc;
+            transition: 0.2s ease-in-out;
+    
+            &:focus,
+            &:focus-visible {
+                outline: none;
+                -webkit-box-shadow: 0px 0px 5px 2px $primary-color;
+                -moz-box-shadow: 0px 0px 5px 2px $primary-color;
+                box-shadow: 0px 0px 5px 2px $primary-color;
+            }
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            position: absolute;
+            background: transparent;
+            color: transparent;
+            width: auto;
+            height: auto;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            cursor: pointer;
+        }
+    
+        .hint {
+            font-size: 11px;
+            font-style: italic;
+            color: #878787;
+            line-height: 11px;
+            margin-top: 3px;
+        }
+
+        .text-danger {
+            font-size: 12px;
+            font-weight: 500;
+        }
+    }
+
+    
+}

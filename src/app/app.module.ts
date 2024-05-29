@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { NgxLoadingModule } from 'ngx-loading';
 import { CompleteComponent } from './components/complete/complete.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CompleteComponent } from './components/complete/complete.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    NgxLoadingModule.forRoot({})
+    NgxLoadingModule.forRoot({}),
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -6,14 +6,17 @@ import { loadingConfig } from 'src/app/shared/loading-config';
 @Component({
   selector: 'app-review-submit',
   templateUrl: './review-submit.component.html',
-  styleUrls: ['./review-submit.component.css']
+  styleUrls: ['./review-submit.component.scss']
 })
 export class ReviewSubmitComponent {
 
   isLoading = false;
   config = loadingConfig;
 
-  constructor(public formWizardService: FormWizardService, private router: Router) { }
+  constructor(
+    public formWizardService: FormWizardService, 
+    private router: Router
+  ) { }
 
   previousStep() {
     this.isLoading = true;
@@ -22,7 +25,7 @@ export class ReviewSubmitComponent {
 
   onSubmit() {
     if (this.formWizardService.form.valid) {
-      console.log("Submitted Values: ", this.formWizardService.form.value);
+      this.router.navigate(['/complete']);
     } else {
       this.formWizardService.form.markAllAsTouched();
     }

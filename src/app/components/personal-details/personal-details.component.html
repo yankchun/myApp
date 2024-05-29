@@ -1,38 +1,43 @@
-<div class="container">
-    <form [formGroup]="personalDetailsForm">
-        <div class="form-group">
-            <label for="introduction">Self Introduction</label>
-            <textarea formControlName="introduction" id="introduction" class="form-control"></textarea>
-            <div *ngIf="personalDetailsInfo['introduction'].invalid && personalDetailsInfo['introduction'].touched"
-                class="text-danger">
-                Self Introduction is required.
+<div class="personal-details-wrapper">
+    <div class="container">
+        <div class="page-title">Personal Details</div>
+        <form [formGroup]="personalDetailsForm">
+            <div class="form-group">
+                <label for="introduction">Self Introduction<span>*</span></label>
+                <textarea formControlName="introduction" id="introduction" class="form-control"></textarea>
+                <div *ngIf="personalDetailsInfo['introduction'].invalid && personalDetailsInfo['introduction'].touched" class="text-danger">Self Introduction is required.</div>
             </div>
-        </div>
 
-        <!-- <div class="form-group">
-            <label>Hobbies</label>
-            <div formArrayName="hobbies">
-                <div *ngFor="let hobby of hobbies.controls; let i = index">
-                    <input [formControlName]="i" class="form-control" type="text">
-                    <button type="button" (click)="removeHobby(i)">Remove</button>
+            <!-- <div class="form-group">
+                <label>Hobbies</label>
+                <div formArrayName="hobbies">
+                    <div *ngFor="let hobby of hobbies.controls; let i = index">
+                        <input [formControlName]="i" class="form-control" type="text">
+                        <button type="button" (click)="removeHobby(i)">Remove</button>
+                    </div>
+                </div>
+                <button type="button" (click)="addHobby()">Add Hobby</button>
+            </div> -->
+
+            <div class="form-group">
+                <label>Hobbies</label>
+                <div class="hobby-input">
+                    <input class="form-control" type="text" (keyup.enter)="addHobby(hobbyInput.value)" #hobbyInput>
+                    <button type="button" class="custom-btn" (click)="addHobby(hobbyInput.value)">Add</button>
+                </div>
+                <div formArrayName="hobbies">
+                    <div *ngFor="let hobby of hobbies.controls; let i = index" class="hobby-item">
+                        <span>{{ hobby.value }}</span>
+                        <button type="button" (click)="removeHobby(i)"><fa-icon [icon]="faXmark"></fa-icon></button>
+                    </div>
                 </div>
             </div>
-            <button type="button" (click)="addHobby()">Add Hobby</button>
-        </div> -->
 
-        <div class="form-group">
-            <label>Hobbies</label>
-            <input class="form-control" type="text" (keyup.enter)="addHobby(hobbyInput.value)" #hobbyInput>
-            <button type="button" (click)="addHobby(hobbyInput.value)">Add Hobby</button>
-            <div formArrayName="hobbies">
-                <div *ngFor="let hobby of hobbies.controls; let i = index">
-                    <p>{{ hobby.value }} <button type="button" (click)="removeHobby(i)">Remove</button></p>
-                </div>
+            <ngx-loading [show]="isLoading" [config]="config"></ngx-loading>
+            <div class="button-wrapper">
+                <button type="button" (click)="previousStep()" class="custom-btn">Back</button>
+                <button type="button" (click)="nextStep()" class="custom-btn">Next</button>
             </div>
-        </div>
-
-        <ngx-loading [show]="isLoading" [config]="config"></ngx-loading>
-        <button type="button" (click)="previousStep()">Back</button>
-        <button type="button" (click)="nextStep()">Next</button>
-    </form>
+        </form>
+    </div>
 </div>
