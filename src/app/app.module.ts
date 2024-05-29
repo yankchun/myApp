@@ -6,6 +6,8 @@ import { GeneralDetailsComponent } from './steps/general-details/general-details
 import { PersonalDetailsComponent } from './steps/personal-details/personal-details.component';
 import { ReviewSubmitComponent } from './steps/review-submit/review-submit.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { NgxLoadingModule } from 'ngx-loading';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    NgxLoadingModule.forRoot({})
   ],
   providers: [],
   bootstrap: [AppComponent]

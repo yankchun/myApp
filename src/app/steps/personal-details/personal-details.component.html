@@ -1,19 +1,37 @@
 <div class="container">
-    <form [formGroup]="formWizardService.personalDetails">
+    <form [formGroup]="personalDetailsForm">
         <div class="form-group">
             <label for="introduction">Self Introduction</label>
             <textarea formControlName="introduction" id="introduction" class="form-control"></textarea>
+            <div *ngIf="personalDetailsInfo['introduction'].invalid && personalDetailsInfo['introduction'].touched"
+                class="text-danger">
+                Self Introduction is required.
+            </div>
         </div>
+
+        <!-- <div class="form-group">
+            <label>Hobbies</label>
+            <div formArrayName="hobbies">
+                <div *ngFor="let hobby of hobbies.controls; let i = index">
+                    <input [formControlName]="i" class="form-control" type="text">
+                    <button type="button" (click)="removeHobby(i)">Remove</button>
+                </div>
+            </div>
+            <button type="button" (click)="addHobby()">Add Hobby</button>
+        </div> -->
 
         <div class="form-group">
             <label>Hobbies</label>
-            <div *ngFor="let hobby of hobbies.controls; let i = index">
-                <input [formControlName]="i" class="form-control" type="text">
-                <button type="button" (click)="removeHobby(i)">Remove</button>
+            <input class="form-control" type="text" (keyup.enter)="addHobby(hobbyInput.value)" #hobbyInput>
+            <button type="button" (click)="addHobby(hobbyInput.value)">Add Hobby</button>
+            <div formArrayName="hobbies">
+                <div *ngFor="let hobby of hobbies.controls; let i = index">
+                    <p>{{ hobby.value }} <button type="button" (click)="removeHobby(i)">Remove</button></p>
+                </div>
             </div>
-            <button type="button" (click)="addHobby()">Add Hobby</button>
         </div>
 
+        <ngx-loading [show]="isLoading" [config]="config"></ngx-loading>
         <button type="button" (click)="previousStep()">Back</button>
         <button type="button" (click)="nextStep()">Next</button>
     </form>

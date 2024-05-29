@@ -10,15 +10,15 @@ export class FormWizardService {
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       generalDetails: this.fb.group({
-        name: ['', [Validators.required]],
-        phoneNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
-        email: ['', [Validators.required, Validators.email]],
-        gender: ['', [Validators.required]],
-        dob: ['', [Validators.required]]
+        name: [''],
+        phoneNumber: [''],
+        email: [''],
+        gender: [''],
+        dob: ['']
       }),
       personalDetails: this.fb.group({
-        introduction: ['', [Validators.required]],
-        hobbies: this.fb.array([])
+        introduction: [''],
+        hobbies: []
       })
     });
   }

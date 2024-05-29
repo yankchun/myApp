@@ -1,11 +1,12 @@
 <div class="container">
-    <form [formGroup]="formWizardService.generalDetails">
+    <form [formGroup]="generalDetailsForm">
       <!-- Name Field -->
       <div class="form-group">
         <label for="name">Name</label>
         <input formControlName="name" id="name" class="form-control" type="text">
-        <div *ngIf="formWizardService.generalDetails.get('name')?.invalid && formWizardService.generalDetails.get('name')?.touched" class="text-danger">
-          Name is required.
+        <div *ngIf="generalDetailsInfo['name'].invalid && generalDetailsInfo['name'].touched" class="text-danger">
+          <div *ngIf="generalDetailsInfo['name'].errors?.['required']">Name is required.</div>
+          <div *ngIf="generalDetailsInfo['name'].errors?.['startsWithSpace']">No leading spaces.</div>
         </div>
       </div>
   
@@ -13,9 +14,10 @@
       <div class="form-group">
         <label for="phoneNumber">Phone Number</label>
         <input formControlName="phoneNumber" id="phoneNumber" class="form-control" type="text">
-        <div *ngIf="formWizardService.generalDetails.get('phoneNumber')?.invalid && formWizardService.generalDetails.get('phoneNumber')?.touched" class="text-danger">
-          <div *ngIf="formWizardService.generalDetails.get('phoneNumber')?.errors?.required">Phone number is required.</div>
-          <div *ngIf="formWizardService.generalDetails.get('phoneNumber')?.errors?.pattern">Invalid phone number format.</div>
+        <div class="hint">Phone number must always starts with 01 followed by minimum of 7 digits and maximum of 9 digits from 0 to 9.</div>
+        <div *ngIf="generalDetailsInfo['phoneNumber'].invalid && generalDetailsInfo['phoneNumber'].touched" class="text-danger">
+          <div *ngIf="generalDetailsInfo['phoneNumber'].errors?.['required']">Phone number is required.</div>
+          <div *ngIf="generalDetailsInfo['phoneNumber'].errors?.['mobNumber']">Invalid phone number format.</div>
         </div>
       </div>
   
@@ -23,9 +25,9 @@
       <div class="form-group">
         <label for="email">Email</label>
         <input formControlName="email" id="email" class="form-control" type="email">
-        <div *ngIf="formWizardService.generalDetails.get('email')?.invalid && formWizardService.generalDetails.get('email')?.touched" class="text-danger">
-          <div *ngIf="formWizardService.generalDetails.get('email')?.errors?.required">Email is required.</div>
-          <div *ngIf="formWizardService.generalDetails.get('email')?.errors?.email">Invalid email address.</div>
+        <div *ngIf="generalDetailsInfo['email'].invalid && generalDetailsInfo['email'].touched" class="text-danger">
+          <div *ngIf="generalDetailsInfo['email'].errors?.['required']">Email is required.</div>
+          <div *ngIf="generalDetailsInfo['email'].errors?.['email']">Invalid email address.</div>
         </div>
       </div>
   
@@ -38,7 +40,7 @@
           <option value="Female">Female</option>
           <option value="Other">Other</option>
         </select>
-        <div *ngIf="formWizardService.generalDetails.get('gender')?.invalid && formWizardService.generalDetails.get('gender')?.touched" class="text-danger">
+        <div *ngIf="generalDetailsInfo['gender'].invalid && generalDetailsInfo['gender'].touched" class="text-danger">
           Gender selection is required.
         </div>
       </div>
@@ -47,13 +49,14 @@
       <div class="form-group">
         <label for="dob">Date of Birth</label>
         <input formControlName="dob" id="dob" class="form-control" type="date">
-        <div *ngIf="formWizardService.generalDetails.get('dob')?.invalid && formWizardService.generalDetails.get('dob')?.touched" class="text-danger">
+        <div *ngIf="generalDetailsInfo['dob'].invalid && generalDetailsInfo['dob'].touched" class="text-danger">
           Date of birth is required.
         </div>
       </div>
   
       <!-- Navigation Buttons -->
-      <button type="button" (click)="nextStep()" class="btn btn-primary">Next</button>
+      <ngx-loading [show]="isLoading" [config]="config"></ngx-loading>
+      <button type="button" (click)="nextStep()" [disabled]="isLoading" class="btn btn-primary">Next</button>
     </form>
   </div>
   
