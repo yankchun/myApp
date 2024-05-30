@@ -14,4 +14,8 @@ export class CompleteComponent {
     private router: Router
   ) { }
 
+  home() {
+    this.router.navigate(['/general-details']);
+  }
+
 }

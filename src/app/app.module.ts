@@ -10,6 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgxLoadingModule } from 'ngx-loading';
 import { CompleteComponent } from './components/complete/complete.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ProgressStepsComponent } from './components/@shared/progress-steps/progress-steps.component';
+import { WizardRedirectComponent } from './components/wizard-redirect/wizard-redirect.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     GeneralDetailsComponent,
     PersonalDetailsComponent,
     ReviewSubmitComponent,
-    CompleteComponent
+    CompleteComponent,
+    ProgressStepsComponent,
+    WizardRedirectComponent
   ],
   imports: [
     BrowserModule,

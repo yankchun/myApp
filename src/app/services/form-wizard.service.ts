@@ -7,6 +7,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class FormWizardService {
   form: FormGroup;
 
+  private formSubmitted = false;
+
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       generalDetails: this.fb.group({
@@ -21,6 +23,26 @@ export class FormWizardService {
         hobbies: []
       })
     });
+  }
+
+  markFormAsSubmitted(): void {
+    this.formSubmitted = true;
+  }
+
+  isFormSubmitted(): boolean {
+    return this.formSubmitted;
+  }
+
+  validateGeneralDetails(): boolean {
+    const details = this.generalDetails.value;
+    const requiredFields = ['name', 'phoneNumber', 'email', 'gender', 'dob'];
+    return requiredFields.every(field => details[field] && details[field].trim() !== '');
+  }
+
+  validatePersonalDetails(): boolean {
+    const details = this.personalDetails.value;
+    const requiredFields = ['introduction'];
+    return requiredFields.every(field => details[field] && details[field].trim() !== '');
   }
 
   get generalDetails() {

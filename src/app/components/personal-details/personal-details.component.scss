@@ -2,10 +2,11 @@
 
 .personal-details-wrapper {
     margin-top: 50px;
+    margin-bottom: 50px;
 
     .hobby-input {
         position: relative;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
         
         .custom-btn {
             position: absolute;
@@ -15,6 +16,10 @@
             font-size: 12px;
             padding: 2px 8px;
         }
+    }
+
+    .hint {
+        margin-bottom: 10px;
     }
 
     .hobby-item {

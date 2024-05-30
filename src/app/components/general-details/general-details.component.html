@@ -1,6 +1,13 @@
 <div class="general-details-wrapper">
     <div class="container">
+        <app-progress-steps></app-progress-steps>
         <div class="page-title">General Details</div>
+        <div>
+            Email Errors: <pre>{{ generalDetailsInfo['email'].invalid | json }}</pre>
+        </div>
+        <div>
+            Phone Number Errors: <pre>{{ generalDetailsInfo['phoneNumber'].errors | json }}</pre>
+        </div>
         <form [formGroup]="generalDetailsForm">
             <div class="row">
                 <div class="col-12 col-sm-6">
@@ -21,6 +28,7 @@
                         <div *ngIf="generalDetailsInfo['phoneNumber'].invalid && generalDetailsInfo['phoneNumber'].touched" class="text-danger">
                             <div *ngIf="generalDetailsInfo['phoneNumber'].errors?.['required']">Phone number is required.</div>
                             <div *ngIf="generalDetailsInfo['phoneNumber'].errors?.['mobNumber']">Invalid phone number format.</div>
+                            <div *ngIf="generalDetailsInfo['phoneNumber'].errors?.['asyncInvalid']">Phone number has been registered by others. Please register with other phone number.</div>
                         </div>
                     </div>
                 </div>
@@ -31,6 +39,7 @@
                         <div *ngIf="generalDetailsInfo['email'].invalid && generalDetailsInfo['email'].touched" class="text-danger">
                             <div *ngIf="generalDetailsInfo['email'].errors?.['required']">Email is required.</div>
                             <div *ngIf="generalDetailsInfo['email'].errors?.['email']">Invalid email address.</div>
+                            <div *ngIf="generalDetailsInfo['email'].errors?.['asyncInvalid']">Email is already taken.</div>
                         </div>
                     </div>
                 </div>

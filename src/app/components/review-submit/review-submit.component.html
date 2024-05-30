@@ -1,61 +1,64 @@
 <div class="review-wrapper">
     <div class="container">
+        <app-progress-steps></app-progress-steps>
         <div class="page-title">Review Your Details</div>
-        <div class="general-section">
-            <div class="section-title">General Details</div>
-            <div class="row">
-                <div class="col-12 col-sm-6">
-                    <div class="wrapper">
-                        <div class="review-label">Name</div>
-                        <div class="review-value">{{ formWizardService.generalDetails.value.name }}</div>
+        <div class="outer-wrapper">
+            <div class="general-section">
+                <div class="section-title">General Details</div>
+                <div class="row">
+                    <div class="col-12 col-sm-6">
+                        <div class="item-wrapper">
+                            <div class="review-label">Name</div>
+                            <div class="review-value">{{ formWizardService.generalDetails.value.name }}</div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-12 col-sm-6">
-                    <div class="wrapper">
-                        <div class="review-label">Phone Number</div>
-                        <div class="review-value">{{ formWizardService.generalDetails.value.phoneNumber }}</div>
+                    <div class="col-12 col-sm-6">
+                        <div class="item-wrapper">
+                            <div class="review-label">Phone Number</div>
+                            <div class="review-value">{{ formWizardService.generalDetails.value.phoneNumber }}</div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-12 col-sm-6">
-                    <div class="wrapper">
-                        <div class="review-label">Email</div>
-                        <div class="review-value">{{ formWizardService.generalDetails.value.email }}</div>
+                    <div class="col-12 col-sm-6">
+                        <div class="item-wrapper">
+                            <div class="review-label">Email</div>
+                            <div class="review-value">{{ formWizardService.generalDetails.value.email }}</div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-12 col-sm-6">
-                    <div class="wrapper">
-                        <div class="review-label">Gender</div>
-                        <div class="review-value">{{ formWizardService.generalDetails.value.gender }}</div>
+                    <div class="col-12 col-sm-6">
+                        <div class="item-wrapper">
+                            <div class="review-label">Gender</div>
+                            <div class="review-value">{{ formWizardService.generalDetails.value.gender }}</div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-12 col-sm-6">
-                    <div class="wrapper">
-                        <div class="review-label">Date of Birth</div>
-                        <div class="review-value">{{ formWizardService.generalDetails.value.dob }}</div>
+                    <div class="col-12 col-sm-6">
+                        <div class="item-wrapper">
+                            <div class="review-label">Date of Birth</div>
+                            <div class="review-value">{{ formWizardService.generalDetails.value.dob }}</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <hr>
+            <hr>
 
-        <div class="personal-section">
-            <div class="section-title">Personal Details</div>
-            <div class="wrapper">
-                <div class="review-label">Introduction</div>
-                <div class="review-value">{{ formWizardService.personalDetails.value.introduction }}</div>
-            </div>
-            <div class="wrapper">
-                <div class="review-label">Hobbies</div>
-                <div class="review-value">
-                    <div class="hobby-item" *ngFor="let hobby of formWizardService.personalDetails.value.hobbies">{{ hobby }}</div>
+            <div class="personal-section">
+                <div class="section-title">Personal Details</div>
+                <div class="item-wrapper intro-row">
+                    <div class="review-label">Introduction</div>
+                    <div class="review-value">{{ formWizardService.personalDetails.value.introduction }}</div>
+                </div>
+                <div class="item-wrapper hobbies-row" *ngIf="formWizardService.personalDetails.value.hobbies">
+                    <div class="review-label">Hobbies</div>
+                    <div class="review-value">
+                        <div class="hobby-item" *ngFor="let hobby of formWizardService.personalDetails.value.hobbies">{{ hobby }}</div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="button-wrapper">
-            <button type="button" (click)="previousStep()" class="custom-btn">Back</button>
-            <button type="button" (click)="onSubmit()" class="custom-btn">Submit</button>
+            <div class="button-wrapper">
+                <button type="button" (click)="previousStep()" class="custom-btn">Back</button>
+                <button type="button" (click)="onSubmit()" class="custom-btn submit">Submit</button>
+            </div>
         </div>
     </div>
 </div>

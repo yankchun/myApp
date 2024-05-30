@@ -3,8 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AjaxService } from 'src/app/services/ajax.service';
 import { FormWizardService } from 'src/app/services/form-wizard.service';
+import { ProgressStepsService } from 'src/app/services/progress-steps.service';
 import { loadingConfig } from 'src/app/shared/loading-config';
-import { mobileNumberValidator, startsWithSpaceValidator } from 'src/app/shared/validator';
+import { emailAsyncValidator, mobileNumberAsyncValidator, mobileNumberValidator, startsWithSpaceValidator } from 'src/app/shared/validator';
 
 @Component({
   selector: 'app-general-details',
@@ -15,8 +16,8 @@ export class GeneralDetailsComponent implements OnInit {
 
   generalDetailsForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, startsWithSpaceValidator]],
-    phoneNumber: ['', [Validators.required, mobileNumberValidator]],
-    email: ['', [Validators.required, Validators.email]],
+    phoneNumber: ['', [Validators.required, mobileNumberValidator], [mobileNumberAsyncValidator(this.ajaxService)]],
+    email: ['', [Validators.required, Validators.email], [emailAsyncValidator(this.ajaxService)]],
     gender: ['', [Validators.required]],
     dob: ['', [Validators.required]]
   });
@@ -24,15 +25,21 @@ export class GeneralDetailsComponent implements OnInit {
   config = loadingConfig;
 
   constructor(
-    public formWizardService: FormWizardService, 
+    public formWizardService: FormWizardService,
+    private progressStepsService: ProgressStepsService,
     public ajaxService: AjaxService, 
     private router: Router,
     private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
-    this.initializeForm()
-    console.log('Personal Details:', this.formWizardService.personalDetails.value);
+    this.initializeForm();
+    this.progressStepsService.setCurrentStep('generalDetails');
+
+    this.generalDetailsForm.get('phoneNumber')!.statusChanges.subscribe(status => {
+      console.log('Phone Number Status:', status);
+      console.log('Phone Number Errors:', this.generalDetailsForm.get('phoneNumber'));
+    });
   }
 
   initializeForm() {
@@ -77,7 +84,6 @@ export class GeneralDetailsComponent implements OnInit {
           console.error('Error during validation:', error.message);
         },
         complete: () => {
-          console.log("Operation complete");
           this.router.navigate(['/personal-details']);
           this.isLoading = false;
         }

@@ -5,6 +5,7 @@ import { FormWizardService } from 'src/app/services/form-wizard.service';
 import { loadingConfig } from 'src/app/shared/loading-config';
 import { AjaxService } from 'src/app/services/ajax.service';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { ProgressStepsService } from 'src/app/services/progress-steps.service';
 
 @Component({
   selector: 'app-personal-details',
@@ -25,14 +26,18 @@ export class PersonalDetailsComponent implements OnInit {
 
   constructor(
     public formWizardService: FormWizardService,
+    private progressStepsService: ProgressStepsService,
     public ajaxService: AjaxService, 
     private fb: FormBuilder, 
     private router: Router
   ) {}
 
   ngOnInit(): void {
+    if (!this.formWizardService.validateGeneralDetails()) {
+      this.router.navigate(['/general-details']);
+    }
     this.initializeForm();
-    console.log('General Details:', this.formWizardService.generalDetails.value.dob);
+    this.progressStepsService.setCurrentStep('personalDetails');
   }
 
   initializeForm() {
@@ -92,7 +97,6 @@ export class PersonalDetailsComponent implements OnInit {
           console.error('Error during validation:', error.message);
         },
         complete: () => {
-          console.log("Operation complete");
           this.router.navigate(['/review-submit']);
           this.isLoading = false;
         }
@@ -113,7 +117,6 @@ export class PersonalDetailsComponent implements OnInit {
           console.error('Error during validation:', error.message);
         },
         complete: () => {
-          console.log("Operation complete");
           this.router.navigate(['/general-details']);
           this.isLoading = false;
         }

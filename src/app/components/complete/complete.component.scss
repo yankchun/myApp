@@ -1,0 +1,20 @@
+.complete-wrapper {
+    margin: 50px 0;
+    text-align: center;
+
+    .complete-title {
+        font-size: 40px;
+        font-weight: bold;
+    }
+
+    .complete-subtitle {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 18px;
+        margin: 30px 0;
+    }
+
+    .button-wrapper {
+        justify-content: center;
+    }
+}
