@@ -1,0 +1,35 @@
+@import '/src/assets/scss/colors.scss';
+
+.popup-wrapper {
+    padding: 30px;
+    text-align: center;
+
+    .popup-title {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .popup-content {
+        margin: 15px 0;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .button-wrapper {
+        justify-content: center;
+
+        button:first-child {
+            margin-right: 10px;
+        }
+
+        button:last-child {
+            background-color: $success-color;
+            border-color: $success-color;
+
+            &:hover {
+                background-color: $success-hover;
+                border-color: $success-hover;
+            }
+        }
+    }
+}

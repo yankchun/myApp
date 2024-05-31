@@ -26,8 +26,8 @@
 
             <ngx-loading [show]="isLoading" [config]="config"></ngx-loading>
             <div class="button-wrapper">
-                <button type="button" (click)="previousStep()" class="custom-btn">Back</button>
-                <button type="button" (click)="nextStep()" class="custom-btn">Next</button>
+                <button type="button" (click)="previousStep()" class="custom-btn" [disabled]="isLoading || personalDetailsForm.invalid">Back</button>
+                <button type="button" (click)="nextStep()" class="custom-btn" [disabled]="isLoading || personalDetailsForm.invalid">Next</button>
             </div>
         </form>
     </div>

@@ -12,6 +12,9 @@ import { CompleteComponent } from './components/complete/complete.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProgressStepsComponent } from './components/@shared/progress-steps/progress-steps.component';
 import { WizardRedirectComponent } from './components/wizard-redirect/wizard-redirect.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ConfirmationDialogComponent } from './components/@shared/confirmation-dialog/confirmation-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -21,14 +24,17 @@ import { WizardRedirectComponent } from './components/wizard-redirect/wizard-red
     ReviewSubmitComponent,
     CompleteComponent,
     ProgressStepsComponent,
-    WizardRedirectComponent
+    WizardRedirectComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     NgxLoadingModule.forRoot({}),
-    FontAwesomeModule
+    FontAwesomeModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

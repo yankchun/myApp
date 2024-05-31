@@ -2,12 +2,6 @@
     <div class="container">
         <app-progress-steps></app-progress-steps>
         <div class="page-title">General Details</div>
-        <div>
-            Email Errors: <pre>{{ generalDetailsInfo['email'].invalid | json }}</pre>
-        </div>
-        <div>
-            Phone Number Errors: <pre>{{ generalDetailsInfo['phoneNumber'].errors | json }}</pre>
-        </div>
         <form [formGroup]="generalDetailsForm">
             <div class="row">
                 <div class="col-12 col-sm-6">
@@ -25,9 +19,9 @@
                         <label for="phoneNumber">Phone Number<span>*</span></label>
                         <input formControlName="phoneNumber" id="phoneNumber" class="form-control" type="text">
                         <div class="hint">Phone number must always starts with 01 followed by minimum of 7 digits and maximum of 9 digits from 0 to 9.</div>
-                        <div *ngIf="generalDetailsInfo['phoneNumber'].invalid && generalDetailsInfo['phoneNumber'].touched" class="text-danger">
-                            <div *ngIf="generalDetailsInfo['phoneNumber'].errors?.['required']">Phone number is required.</div>
-                            <div *ngIf="generalDetailsInfo['phoneNumber'].errors?.['mobNumber']">Invalid phone number format.</div>
+                        <div *ngIf="generalDetailsInfo['phoneNumber'].invalid" class="text-danger">
+                            <div *ngIf="generalDetailsInfo['phoneNumber'].touched && generalDetailsInfo['phoneNumber'].errors?.['required']">Phone number is required.</div>
+                            <div *ngIf="generalDetailsInfo['phoneNumber'].touched && generalDetailsInfo['phoneNumber'].errors?.['mobNumber']">Invalid phone number format.</div>
                             <div *ngIf="generalDetailsInfo['phoneNumber'].errors?.['asyncInvalid']">Phone number has been registered by others. Please register with other phone number.</div>
                         </div>
                     </div>
@@ -36,9 +30,9 @@
                     <div class="form-group">
                         <label for="email">Email<span>*</span></label>
                         <input formControlName="email" id="email" class="form-control" type="email">
-                        <div *ngIf="generalDetailsInfo['email'].invalid && generalDetailsInfo['email'].touched" class="text-danger">
-                            <div *ngIf="generalDetailsInfo['email'].errors?.['required']">Email is required.</div>
-                            <div *ngIf="generalDetailsInfo['email'].errors?.['email']">Invalid email address.</div>
+                        <div *ngIf="generalDetailsInfo['email'].invalid" class="text-danger">
+                            <div *ngIf="generalDetailsInfo['email'].touched && generalDetailsInfo['email'].errors?.['required']">Email is required.</div>
+                            <div *ngIf="generalDetailsInfo['email'].touched && generalDetailsInfo['email'].errors?.['email']">Invalid email address.</div>
                             <div *ngIf="generalDetailsInfo['email'].errors?.['asyncInvalid']">Email is already taken.</div>
                         </div>
                     </div>
@@ -66,7 +60,7 @@
             <ngx-loading [show]="isLoading" [config]="config"></ngx-loading>
 
             <div class="button-wrapper">
-                <button type="button" (click)="nextStep()" [disabled]="isLoading" class="custom-btn">Next</button>
+                <button type="button" (click)="nextStep()" [disabled]="isLoading || generalDetailsForm.invalid" class="custom-btn">Next</button>
             </div>
         </form>
     </div>

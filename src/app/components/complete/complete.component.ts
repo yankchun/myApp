@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormWizardService } from 'src/app/services/form-wizard.service';
 
 @Component({
   selector: 'app-complete',
@@ -10,7 +9,6 @@ import { FormWizardService } from 'src/app/services/form-wizard.service';
 export class CompleteComponent {
 
   constructor(
-    public formWizardService: FormWizardService,
     private router: Router
   ) { }
 

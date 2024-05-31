@@ -36,35 +36,18 @@ export class GeneralDetailsComponent implements OnInit {
     this.initializeForm();
     this.progressStepsService.setCurrentStep('generalDetails');
 
-    this.generalDetailsForm.get('phoneNumber')!.statusChanges.subscribe(status => {
-      console.log('Phone Number Status:', status);
-      console.log('Phone Number Errors:', this.generalDetailsForm.get('phoneNumber'));
+    this.generalDetailsForm.statusChanges.subscribe(status => {
+      this.isLoading = status === 'PENDING';
     });
   }
 
   initializeForm() {
     const generalDetails = this.formWizardService.generalDetails.value;
-    
+
     if (generalDetails) {
-      if (generalDetails.name) {
-        this.generalDetailsInfo['name'].setValue(generalDetails.name);
-      }
-  
-      if (generalDetails.phoneNumber) {
-        this.generalDetailsInfo['phoneNumber'].setValue(generalDetails.phoneNumber);
-      }
-
-      if (generalDetails.email) {
-        this.generalDetailsInfo['email'].setValue(generalDetails.email);
-      }
-
-      if (generalDetails.gender) {
-        this.generalDetailsInfo['gender'].setValue(generalDetails.gender);
-      }
-
-      if (generalDetails.dob) {
-        this.generalDetailsInfo['dob'].setValue(generalDetails.dob);
-      }
+      Object.keys(generalDetails).forEach(key => {
+        this.generalDetailsForm.get(key)?.setValue(generalDetails[key]);
+      });
     }
 
   }

@@ -41,7 +41,6 @@ export class PersonalDetailsComponent implements OnInit {
   }
 
   initializeForm() {
-    // Check if the service has values already set
     const personalDetails = this.formWizardService.personalDetails.value;
     
     if (personalDetails) {
@@ -50,10 +49,8 @@ export class PersonalDetailsComponent implements OnInit {
       }
   
       if (personalDetails.hobbies && personalDetails.hobbies.length) {
-        // Clear existing form array entries
         this.hobbies.clear();
   
-        // Populate the hobbies form array
         personalDetails.hobbies.forEach((hobby: []) => {
           this.hobbies.push(this.fb.control(hobby, Validators.required));
         });

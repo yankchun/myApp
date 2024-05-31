@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { FormWizardService } from 'src/app/services/form-wizard.service';
 import { ProgressStepsService } from 'src/app/services/progress-steps.service';
 import { loadingConfig } from 'src/app/shared/loading-config';
+import { ConfirmationDialogComponent } from '../@shared/confirmation-dialog/confirmation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-review-submit',
@@ -17,7 +19,8 @@ export class ReviewSubmitComponent implements OnInit {
   constructor(
     public formWizardService: FormWizardService,
     private progressStepsService: ProgressStepsService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -35,12 +38,21 @@ export class ReviewSubmitComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.formWizardService.form.valid) {
-      this.formWizardService.markFormAsSubmitted();
-      console.log('Submitted Form Values:', this.formWizardService.form.value);
-      this.router.navigate(['/complete']);
-    } else {
-      this.formWizardService.form.markAllAsTouched();
-    }
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '250px'
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (this.formWizardService.form.valid) {
+          this.formWizardService.markFormAsSubmitted();
+          console.log('Submitted Form Values:', this.formWizardService.form.value);
+          this.formWizardService.form.reset();
+          this.router.navigate(['/complete']);
+        } else {
+          this.formWizardService.form.markAllAsTouched();
+        }
+      }
+    });
   }
 }

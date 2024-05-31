@@ -1,6 +1,6 @@
 @import '/src/assets/scss/colors.scss';
 
-$background-color-completed: #4bb543;
+$background-color-completed: $success-color;
 $background-color-current: $primary-color;
 
 .progress-steps {
