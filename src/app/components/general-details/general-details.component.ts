@@ -16,8 +16,8 @@ export class GeneralDetailsComponent implements OnInit {
 
   generalDetailsForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, startsWithSpaceValidator]],
-    phoneNumber: ['', [Validators.required, mobileNumberValidator], [mobileNumberAsyncValidator(this.ajaxService)]],
-    email: ['', [Validators.required, Validators.email], [emailAsyncValidator(this.ajaxService)]],
+    phoneNumber: ['', [Validators.required, mobileNumberValidator], [mobileNumberAsyncValidator(this.ajaxService, this.setLoading.bind(this))]],
+    email: ['', [Validators.required, Validators.email], [emailAsyncValidator(this.ajaxService, this.setLoading.bind(this))]],
     gender: ['', [Validators.required]],
     dob: ['', [Validators.required]]
   });
@@ -35,19 +35,17 @@ export class GeneralDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.initializeForm();
     this.progressStepsService.setCurrentStep('generalDetails');
+  }
 
-    this.generalDetailsForm.statusChanges.subscribe(status => {
-      this.isLoading = status === 'PENDING';
-    });
+  setLoading(isLoading: boolean) {
+    this.isLoading = isLoading;
   }
 
   initializeForm() {
     const generalDetails = this.formWizardService.generalDetails.value;
 
     if (generalDetails) {
-      Object.keys(generalDetails).forEach(key => {
-        this.generalDetailsForm.get(key)?.setValue(generalDetails[key]);
-      });
+      this.generalDetailsForm.patchValue(generalDetails);
     }
 
   }
@@ -61,7 +59,7 @@ export class GeneralDetailsComponent implements OnInit {
       this.isLoading = true;
       this.ajaxService.performAsyncCheck().subscribe({
         next: () => {
-          this.formWizardService.generalDetails.setValue(this.generalDetailsForm.value);
+          this.formWizardService.generalDetails.patchValue(this.generalDetailsForm.value);
         },
         error: (error) => {
           console.error('Error during validation:', error.message);

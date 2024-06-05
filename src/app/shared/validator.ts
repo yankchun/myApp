@@ -21,11 +21,16 @@ const startsWithSpaceValidator = (control: FormControl) => {
     }
 };
 
-const mobileNumberAsyncValidator = (ajaxService: AjaxService) => {
+const mobileNumberAsyncValidator = (ajaxService: AjaxService, setLoading: (isLoading: boolean) => void) => {
   return (control: FormControl) => {
+    setLoading(true);
     return timer(1000).pipe(
       switchMap(() => ajaxService.checkPhoneNumber(control.value).pipe(
         map(valid => valid ? null : { invalid: true, asyncInvalid: true }),
+        tap({
+          next: () => setLoading(false),
+          error: () => setLoading(false)
+        })
         // tap(result => console.log('Validation result for phone number:', result))
       ))
     )
@@ -38,11 +43,16 @@ const mobileNumberAsyncValidator = (ajaxService: AjaxService) => {
   };
 };
 
-const emailAsyncValidator = (ajaxService: AjaxService) => {
+const emailAsyncValidator = (ajaxService: AjaxService,setLoading: (isLoading: boolean) => void) => {
   return (control: FormControl) => {
+    setLoading(true);
     return timer(1000).pipe(
       switchMap(() => ajaxService.checkEmail(control.value).pipe(
         map(valid => valid ? null : { invalid: true, asyncInvalid: true }),
+        tap({
+          next: () => setLoading(false),
+          error: () => setLoading(false)
+        })
         // tap(result => console.log('Validation result for email:', result))
       ))
     )

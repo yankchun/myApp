@@ -45,7 +45,7 @@ export class PersonalDetailsComponent implements OnInit {
     
     if (personalDetails) {
       if (personalDetails.introduction) {
-        this.personalDetailsInfo['introduction'].setValue(personalDetails.introduction);
+        this.personalDetailsInfo['introduction'].patchValue(personalDetails.introduction);
       }
   
       if (personalDetails.hobbies && personalDetails.hobbies.length) {
@@ -88,7 +88,7 @@ export class PersonalDetailsComponent implements OnInit {
       this.isLoading = true;
       this.ajaxService.performAsyncCheck().subscribe({
         next: () => {
-          this.formWizardService.personalDetails.setValue(this.personalDetailsForm.value);
+          this.formWizardService.personalDetails.patchValue(this.personalDetailsForm.value);
         },
         error: (error) => {
           console.error('Error during validation:', error.message);
@@ -108,7 +108,7 @@ export class PersonalDetailsComponent implements OnInit {
       this.isLoading = true;
       this.ajaxService.performAsyncCheck().subscribe({
         next: () => {
-          this.formWizardService.personalDetails.setValue(this.personalDetailsForm.value);
+          this.formWizardService.personalDetails.patchValue(this.personalDetailsForm.value);
         },
         error: (error) => {
           console.error('Error during validation:', error.message);
